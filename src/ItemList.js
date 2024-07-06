@@ -1,6 +1,6 @@
-// src/ItemList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css'; // Import the CSS file
 
 const API_URL = 'https://fakestoreapi.com/products';
 
@@ -52,49 +52,51 @@ const ItemList = () => {
   };
 
   return (
-    <div>
+    <div className="ItemList">
       <h1>Item List</h1>
       <div>
         <h2>{editItem ? 'Edit Item' : 'Add New Item'}</h2>
-        <input
-          type="text"
-          placeholder="Title"
-          value={editItem ? editItem.title : newItem.title}
-          onChange={(e) => (editItem ? setEditItem({ ...editItem, title: e.target.value }) : setNewItem({ ...newItem, title: e.target.value }))}
-        />
-        <input
-          type="text"
-          placeholder="Price"
-          value={editItem ? editItem.price : newItem.price}
-          onChange={(e) => (editItem ? setEditItem({ ...editItem, price: e.target.value }) : setNewItem({ ...newItem, price: e.target.value }))}
-        />
-        <textarea
-          placeholder="Description"
-          value={editItem ? editItem.description : newItem.description}
-          onChange={(e) => (editItem ? setEditItem({ ...editItem, description: e.target.value }) : setNewItem({ ...newItem, description: e.target.value }))}
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={editItem ? editItem.image : newItem.image}
-          onChange={(e) => (editItem ? setEditItem({ ...editItem, image: e.target.value }) : setNewItem({ ...newItem, image: e.target.value }))}
-        />
-        <input
-          type="text"
-          placeholder="Category"
-          value={editItem ? editItem.category : newItem.category}
-          onChange={(e) => (editItem ? setEditItem({ ...editItem, category: e.target.value }) : setNewItem({ ...newItem, category: e.target.value }))}
-        />
-        <button onClick={editItem ? updateItem : addItem}>{editItem ? 'Update' : 'Add'} Item</button>
+        <form>
+          <input
+            type="text"
+            placeholder="Title"
+            value={editItem ? editItem.title : newItem.title}
+            onChange={(e) => (editItem ? setEditItem({ ...editItem, title: e.target.value }) : setNewItem({ ...newItem, title: e.target.value }))}
+          />
+          <input
+            type="text"
+            placeholder="Price"
+            value={editItem ? editItem.price : newItem.price}
+            onChange={(e) => (editItem ? setEditItem({ ...editItem, price: e.target.value }) : setNewItem({ ...newItem, price: e.target.value }))}
+          />
+          <textarea
+            placeholder="Description"
+            value={editItem ? editItem.description : newItem.description}
+            onChange={(e) => (editItem ? setEditItem({ ...editItem, description: e.target.value }) : setNewItem({ ...newItem, description: e.target.value }))}
+          />
+          <input
+            type="text"
+            placeholder="Image URL"
+            value={editItem ? editItem.image : newItem.image}
+            onChange={(e) => (editItem ? setEditItem({ ...editItem, image: e.target.value }) : setNewItem({ ...newItem, image: e.target.value }))}
+          />
+          <input
+            type="text"
+            placeholder="Category"
+            value={editItem ? editItem.category : newItem.category}
+            onChange={(e) => (editItem ? setEditItem({ ...editItem, category: e.target.value }) : setNewItem({ ...newItem, category: e.target.value }))}
+          />
+          <button type="button" onClick={editItem ? updateItem : addItem}>{editItem ? 'Update' : 'Add'} Item</button>
+        </form>
       </div>
       <ul>
         {items.map(item => (
           <li key={item.id}>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
-            <p>{item.price}</p>
-            <p>{item.category}</p>
-            <img src={item.image} alt={item.title} width="100" />
+            <p>Price: ${item.price}</p>
+            <p>Category: {item.category}</p>
+            <img src={item.image} alt={item.title} />
             <button onClick={() => setEditItem(item)}>Edit</button>
             <button onClick={() => deleteItem(item.id)}>Delete</button>
           </li>

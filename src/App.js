@@ -1,13 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import UserList from './UserList';
 import ItemList from './ItemList';
 
 function App() {
   return (
- 
-<ItemList/>
-
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Welcome to React</h1>
+      </header>
+      <ItemList />
+    </div>
   );
 }
 
